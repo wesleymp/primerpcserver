@@ -12,6 +12,8 @@ import (
 
 var addr string = "localhost:50051"
 
+var number int32 = 120
+
 func main() {
 	conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
@@ -19,7 +21,7 @@ func main() {
 	}
 	c := pb.NewPrimeServiceClient(conn)
 	req := &pb.PrimeNumberRequest{
-		PrimeNumber: 120,
+		PrimeNumber: number,
 	}
 	stream, err := c.PrimeNumber(context.Background(), req)
 	if err != nil {
